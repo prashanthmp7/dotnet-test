@@ -3,6 +3,8 @@ using DotnetBackend.Models;
 
 namespace DotnetBackend.Models;
 
+// ---- API response wrappers ----
+
 public class UsersResponse
 {
     [JsonPropertyName("users")]
@@ -20,6 +22,8 @@ public class TasksResponse
     [JsonPropertyName("count")]
     public int Count { get; set; }
 }
+
+// ---- Stats breakdown for the dashboard ----
 
 public class UsersStats
 {
@@ -58,4 +62,43 @@ public class HealthResponse
 
     [JsonPropertyName("message")]
     public string Message { get; set; } = string.Empty;
+}
+
+// ---- Incoming request bodies ----
+
+public class CreateUserRequest
+{
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
+
+    [JsonPropertyName("role")]
+    public string? Role { get; set; }
+}
+
+public class CreateTaskRequest
+{
+    [JsonPropertyName("title")]
+    public string? Title { get; set; }
+
+    [JsonPropertyName("status")]
+    public string? Status { get; set; }
+
+    [JsonPropertyName("userId")]
+    public int? UserId { get; set; }
+}
+
+// All fields nullable so clients can send only what they want to change
+public class UpdateTaskRequest
+{
+    [JsonPropertyName("title")]
+    public string? Title { get; set; }
+
+    [JsonPropertyName("status")]
+    public string? Status { get; set; }
+
+    [JsonPropertyName("userId")]
+    public int? UserId { get; set; }
 }
